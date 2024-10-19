@@ -1,0 +1,63 @@
+git commit -m "WEB-9 <DB components>"
+
+class Inventory(ABC):
+    books_shelf = []
+    magazines_shelf = []
+    Dvds_holder = []
+
+    @classmethod
+    def show_inventory(cls):
+        print("books: ")
+        for book in cls.books_shelf:
+            print(book.get_all_info())
+        print("\n____________\nmagazines:")
+        for magazine in cls.magazines_shelf:
+            print(magazine.get_all_info())
+        print("\n____________\ndvds:")
+        for dvd in cls.Dvds_holder:
+            print(dvd.get_all_info())
+
+    @classmethod
+    def show_books(cls):
+        print("books: ")
+        for book in cls.books_shelf:
+            print(book.get_all_info())
+    
+    @classmethod
+    def show_magazines(cls):
+        print("magazines:")
+        for magazine in cls.magazines_shelf:
+            print(magazine.get_all_info())
+    
+    @classmethod
+    def show_dvds(cls):
+        print("dvds:")
+        for dvd in cls.Dvds_holder:
+            print(dvd.get_all_info())
+
+    @classmethod
+    def searchBytitle(cls, obj_title):
+        all_inventory = cls.books_shelf + cls.magazines_shelf + cls.Dvds_holder
+        for item in all_inventory:
+            if item.get_title() == obj_title:
+                return item  
+        else:  
+            return None  
+
+    @classmethod
+    def searchByauthor(cls, obj_author):
+        all_inventory = cls.books_shelf + cls.magazines_shelf + cls.Dvds_holder
+        for item in all_inventory:
+            if item.get_author() == obj_author:
+                return item 
+        else:
+            return None
+    @classmethod
+    def searchByprice(cls, obj_price):
+        all_inventory = cls.books_shelf + cls.magazines_shelf + cls.Dvds_holder
+        for item in all_inventory:
+            if item.get_price() == obj_price:
+                return item  
+        else:
+            return None  
+    
