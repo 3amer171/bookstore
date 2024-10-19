@@ -1,0 +1,77 @@
+git commit -m "WEB-8 <define the base classes>"
+
+
+from abc import ABC,abstractmethod
+class Item(ABC):
+    def __init__(self,title,author,price):
+        self._title = title
+        self._author = author
+        self._price = price
+
+    def set_price(self,new_price):
+        try:
+            new_price = float(new_price) 
+            if new_price >= 0:  
+                self._price = new_price
+            else:
+                raise ValueError("Price must be a non negative number")
+        except ValueError:
+            print("Invalid price ,Please enter a valid numeric value")
+    def get_title(self):
+        return self._title
+    def get_author(self):
+        return self._author
+    def get_price(self):
+        return self._price
+    # made this abstract method because all info for each sub class will be diffrent despite the 3 common attributes
+    @abstractmethod
+    def get_all_info(self):
+        pass
+
+class Book(Item):
+    def __init__(self,title,author,price,ISBN,genre,pages_no):
+        super().__init__(title,author,price)
+        self.__ISBN = ISBN 
+        self.__genre = genre
+        self.__pages_no = pages_no
+#  no get func for the  ISBN as its the number above the barcode so its not important for the user
+    def get_genre(self):
+        return self.__genre
+    def get_pagesNo(self):
+        return self.__pages_no
+    def get_all_info(self):
+        return f"title:{self._title},author:{self._author},price:{self._price},genre:{self.__genre},pages number:{self.__pages_no}"
+
+class Magazine(Item):
+    def __init__(self,title,author,price,pub_date,issue_no,editor):
+        super().__init__(title,author,price)
+        self.__pub_date = pub_date
+        self.__issue_no = issue_no
+        self.__editor = editor
+
+    def get_pub_date(self):
+        return self.__pub_date
+    def get_issue_no(self):
+       return self.__issue_no
+    def get_editor(self):
+        return self.__editor
+    def get_all_info(self):
+         return f"title:{self._title},author:{self._author},price:{self._price},publication date:{self.__pub_date},issue number:{self.__issue_no},editor name:{self.__editor}"
+    
+class Dvd(Item):
+    def __init__(self,title,author,price,director,duration,genre):
+        super().__init__(title,author,price)
+        self.__director = director
+        self.__duration = duration
+        self.__genre = genre
+    
+    def get_director(self):
+        return self.__director
+    def get_duration(self):
+      return self.__duration
+    def get_genre(self):
+        return self.__genre
+    def get_all_info(self):
+        return f"title:{self._title},author:{self._author},price:{self._price},director:{self.__director},film duration:{self.__duration},genre:{self.__genre}"
+        
+
